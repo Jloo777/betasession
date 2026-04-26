@@ -318,9 +318,10 @@
     font-family: 'Poppins', sans-serif;
     padding: 4px 6px;
     transition: border-color 0.12s;
-    resize: vertical;
-    min-height: 56px;
+    resize: none;
+    min-height: 40px;
     line-height: 1.5;
+    overflow: hidden;
   }
 
   .note-input:focus { outline: none; border-color: var(--ocean); background: #fff; }
@@ -690,7 +691,13 @@ function addSubjectRow() {
   noteInp.className = 'note-input';
   noteInp.placeholder = 'Optional note...';
   noteInp.setAttribute('data-field', 'note');
-  noteInp.oninput = function() { updateProCare(); };
+  noteInp.rows = 2;
+  noteInp.style.overflow = 'hidden';
+  noteInp.oninput = function() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
+    updateProCare();
+  };
   td4.appendChild(noteInp);
 
   tr.appendChild(td1);
